@@ -44,6 +44,7 @@ class ExerciseListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CustomCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = 100
+        tableView.backgroundColor = .darkGray
         tableView.sectionHeaderHeight = 50
         return tableView
     }()
@@ -53,7 +54,9 @@ class ExerciseListViewController: UIViewController {
             exerciseTableView.topAnchor.constraint(equalTo: view.topAnchor),
             exerciseTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             exerciseTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            exerciseTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            exerciseTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            
         ])
     }
 }
@@ -64,6 +67,23 @@ extension ExerciseListViewController: UITableViewDataSource {
         let exercises = exercisesArray[indexPath.row]
         cell.exerciseName.text = exercises.name
         cell.exerciseImage.image = UIImage(named: exercises.image)
+        cell.exerciseImage.layer.cornerRadius = 25
+        cell.exerciseName.sizeToFit()
+        
+        func setCellConstraints() {
+            NSLayoutConstraint.activate([
+                cell.exerciseName.topAnchor.constraint(equalTo: tableView.topAnchor),
+                cell.exerciseName.bottomAnchor.constraint(equalTo: tableView.topAnchor),
+                cell.exerciseName.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 120),
+                cell.exerciseImage.topAnchor.constraint(equalTo: tableView.topAnchor),
+                cell.exerciseImage.bottomAnchor.constraint(equalTo: tableView.topAnchor),
+                cell.exerciseImage.leadingAnchor.constraint(equalTo: tableView.trailingAnchor),
+                cell.exerciseImage.trailingAnchor.constraint(equalTo: tableView.leadingAnchor),
+                cell.exerciseImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor, constant: 10),
+                cell.exerciseImage.centerYAnchor.constraint(equalTo: tableView.centerYAnchor, constant: 10)
+
+            ])
+        }
         return cell
     }
     
